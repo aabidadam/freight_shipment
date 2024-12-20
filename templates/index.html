@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipment Delay Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background: #007bff;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .prediction {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .on-time {
+            color: green;
+        }
+        .delayed {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shipment Delay Prediction</h1>
+        <form action="/predict" method="post">
+            <label for="Vehicle Type">Vehicle Type:</label>
+            <select name="Vehicle Type" id="vehicle_type" required>
+                <option value="0">Truck</option>
+                <option value="1">Container</option>
+                <option value="2">Lorry</option>
+                <option value="3">Trailer</option>
+            </select>
+
+            <label for="weather">Weather Conditions:</label>
+            <select name="Weather Conditions" id="weather" required>
+                <option value="0">Clear</option>
+                <option value="1">Rain</option>
+                <option value="2">Fog</option>
+                <option value="3">Storm</option>
+            </select>
+
+            <label for="traffic">Traffic Conditions:</label>
+            <select name="Traffic Conditions" id="traffic" required>
+                <option value="0">Light</option>
+                <option value="1">Moderate</option>
+                <option value="2">Heavy</option>
+            </select>
+
+            <label for="origin">Origin:</label>
+            <select name="Origin" id="origin" required>
+                <option value="0">Ahmedabad</option>
+                <option value="1">Bangalore</option>
+                <option value="2">Chennai</option>
+                <option value="3">Delhi</option>
+                <option value="4">Hyderabad</option>
+                <option value="5">Jaipur</option>
+                <option value="6">Kolkata</option>
+                <option value="7">Lucknow</option>
+                <option value="8">Mumbai</option>
+                <option value="9">Pune</option>                
+            </select>
+
+            <label for="destination">Destination:</label>
+            <select name="Destination" id="destination" required>
+                <option value="0">Ahmedabad</option>
+                <option value="1">Bangalore</option>
+                <option value="2">Chennai</option>
+                <option value="3">Delhi</option>
+                <option value="4">Hyderabad</option>
+                <option value="5">Jaipur</option>
+                <option value="6">Kolkata</option>
+                <option value="7">Lucknow</option>
+                <option value="8">Mumbai</option>
+                <option value="9">Pune</option>                
+            </select>
+
+            <label for="distance">Distance (km):</label>
+            <input type="number" name="Distance (km)" id="distance" min="1" placeholder="Enter distance" required>
+
+            <button type="submit">Predict</button>
+        </form>
+        <div class="prediction">
+            {% if prediction_text %}
+                {% if "On Time" in prediction_text %}
+                    <h2 class="on-time">{{ prediction_text }}</h2>
+                {% elif "Delayed" in prediction_text %}
+                    <h2 class="delayed">{{ prediction_text }}</h2>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
