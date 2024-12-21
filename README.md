@@ -47,7 +47,8 @@ The complete codebase, including data cleaning, EDA, model training, and Flask i
    ```
 4. Access the web interface at `http://localhost:5000` and input shipment details to get predictions.
 
-## you can also directly accesss by the `https://freight-shipment.onrender.com`
+## you can also directly accesss by the
+ `https://freight-shipment.onrender.com`
 
 
 ## Results
